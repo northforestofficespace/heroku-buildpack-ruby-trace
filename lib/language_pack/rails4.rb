@@ -74,7 +74,7 @@ WARNING
       @cache.load_without_overwrite public_assets_folder
       @cache.load default_assets_cache
 
-      precompile.invoke(env: rake_env)
+      precompile.invoke(env: rake_env, out: "--trace 2>&1")
 
       if precompile.success?
         log "assets_precompile", :status => "success"
