@@ -225,7 +225,8 @@ module LanguagePack
         until io.eof?
           buffer = io.gets
           output << buffer
-          output_object.puts(buffer) unless silent
+          output_object.puts(buffer)
+          puts buffer
         end
       end
 
