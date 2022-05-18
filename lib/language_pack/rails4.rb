@@ -74,8 +74,8 @@ WARNING
       @cache.load_without_overwrite public_assets_folder
       @cache.load default_assets_cache
 
-      ap "Skipping precompile?"
-      ap precompile.not_defined?
+      puts "Skipping precompile?"
+      puts precompile.not_defined?
       return true if precompile.not_defined?
       
       precompile.invoke(env: rake_env)
