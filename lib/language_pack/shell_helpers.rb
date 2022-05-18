@@ -131,7 +131,6 @@ module LanguagePack
       options[:out] ||= "2>&1"
       options[:env] = user_env_hash.merge(options[:env]) if options[:user_env]
       env = options[:env].map {|key, value| "#{key.shellescape}=#{value.shellescape}" }.join(" ")
-      puts "/usr/bin/env #{env} bash -c #{command.shellescape} #{options[:out]} "
       "/usr/bin/env #{env} bash -c #{command.shellescape} #{options[:out]} "
     end
 
@@ -159,7 +158,6 @@ module LanguagePack
     #   spawn = ProcessSpawn.new("sleep 10", timeout: 4)
     #   spawn.success? # => false
     #   spawn.timeout? # => true
-    #
     class ProcessSpawn
       include ShellHelpers
 
