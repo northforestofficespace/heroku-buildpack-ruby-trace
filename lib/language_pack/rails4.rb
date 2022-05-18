@@ -73,8 +73,6 @@ WARNING
 
       @cache.load_without_overwrite public_assets_folder
       @cache.load default_assets_cache
-      ap @cache.load_without_overwrite public_assets_folder
-      ap @cache.load default_assets_cache
 
       ap "Skipping precompile?"
       ap precompile.not_defined?
