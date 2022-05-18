@@ -158,6 +158,7 @@ module LanguagePack
     #   spawn = ProcessSpawn.new("sleep 10", timeout: 4)
     #   spawn.success? # => false
     #   spawn.timeout? # => true
+    #
     class ProcessSpawn
       include ShellHelpers
 
