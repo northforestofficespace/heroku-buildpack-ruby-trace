@@ -66,18 +66,14 @@ WARNING
         return true
       end
 
-      precompile = rake.task("assets:precompile --trace")
-      
+      precompile = rake.task("assets:precompile")
+      return true if precompile.not_defined?      
 
       topic("Preparing app for Rails asset pipeline")
 
       @cache.load_without_overwrite public_assets_folder
       @cache.load default_assets_cache
 
-      puts "Skipping precompile?"
-      puts precompile.not_defined?
-      return true if precompile.not_defined?
-      
       precompile.invoke(env: rake_env)
 
       if precompile.success?
@@ -94,7 +90,29 @@ WARNING
           @cache.store default_assets_cache
         end
       else
-        precompile_fail(precompile.output)
+        topic("Sleeping")
+        sleep(30)
+        topic("Retrying")
+        
+        precompile.invoke(env: rake_env)
+        
+        if precompile.success?
+          log "assets_precompile", :status => "success"
+          puts "Asset precompilation completed (#{"%.2f" % precompile.time}s)"
+
+          clean_task = rake.task("assets:clean")
+          
+          if clean_task.task_defined?
+            puts "Cleaning assets"
+            clean_task.invoke(env: rake_env)
+
+            cleanup_assets_cache
+            @cache.store public_assets_folder
+            @cache.store default_assets_cache
+          end
+        else
+          precompile_fail(precompile.output)
+        end
       end
     end
   end
