@@ -53,6 +53,7 @@ FILE
   end
 
   def db_prepare_test_rake_tasks
+    topic "Rails 2 file rake tasks"
     db_create      = rake.task("db:create")
     schema_load    = rake.task("db:schema:load_if_ruby")
     structure_load = rake.task("db:structure:load_if_sql")
