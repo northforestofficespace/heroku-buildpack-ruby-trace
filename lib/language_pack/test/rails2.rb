@@ -28,9 +28,9 @@ class LanguagePack::Rails2
 
   def db_test_tasks_to_clear
     # db:test:purge is called by everything in the db:test namespace
-    # db:create is called by :db:schema:load_if_ruby
+    # db:create is called by :db:schema:load_if_ruby -- Removed from skip
     # db:structure:dump is not needed for tests, but breaks Rails 3.2 db:structure:load on Heroku
-    ["db:test:purge", "db:create", "db:structure:dump"]
+    ["db:test:purge", "db:structure:dump"]
   end
 
   # rails test runner + rspec depend on db:test:purge which drops/creates a db which doesn't work on Heroku's DB plans
